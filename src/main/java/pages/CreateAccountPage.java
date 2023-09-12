@@ -7,23 +7,35 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 public class CreateAccountPage {
     private final Page createAccountPage;
-    public CreateAccountPage(Page page){
+    private static final String FIRST_NAME = "input#firstName";
+    private static final String LAST_NAME = "input#lastName";
+    private static final String EMAIL = "input#email";
+    private static final String PASSWORD = "input#fld-p1";
+    private static final String CONFIRM_PASSWORD = "input#reenterPassword";
+    private static final String PHONE = "input#phone";
+    private static final String VALIDATION_MESSAGE = "span.c-input-error-message";
+    private static final String RECOVERY_PHONE_CHECKBOX = "input#is-recovery-phone";
+    private static final String SUBMIT = "button.cia-form__controls__submit";
+
+
+    public CreateAccountPage(Page page) {
         this.createAccountPage = page;
     }
-    public void createAccount(){
-        createAccountPage.locator("input#firstName").fill("FirstName");
-        createAccountPage.locator("input#lastName").fill("LastName");
-        createAccountPage.locator("input#email").fill("alex@example.com");
-        createAccountPage.locator("input#fld-p1").fill("1kljsOIU");
-        createAccountPage.locator("input#reenterPassword").fill("1kljsOIU");
 
-        assertThat(createAccountPage.locator("span.c-input-error-message")).containsText(
-                "Your passwords march!", new LocatorAssertions.ContainsTextOptions().setTimeout(30000));
+    public void createAccount() {
+        createAccountPage.locator(FIRST_NAME).fill("FirstName");
+        createAccountPage.locator(LAST_NAME).fill("LastName");
+        createAccountPage.locator(EMAIL).fill("alex@example.com");
+        createAccountPage.locator(PASSWORD).fill("1kljsOIU");
+        createAccountPage.locator(CONFIRM_PASSWORD).fill("1kljsOIU");
 
-        createAccountPage.locator("input#phone").fill("0417611025");
-        createAccountPage.locator("input#is-recovery-phone").check();
+        assertThat(createAccountPage.locator(VALIDATION_MESSAGE)).containsText(
+                "Your passwords match!", new LocatorAssertions.ContainsTextOptions().setTimeout(30000));
 
-        assertThat(createAccountPage.locator("button.cia-form__controls__submit")).isEnabled(new LocatorAssertions.IsEnabledOptions().setTimeout(10000));
+        createAccountPage.locator(PHONE).fill("0417611025");
+        createAccountPage.locator(RECOVERY_PHONE_CHECKBOX).check();
+
+        assertThat(createAccountPage.locator(SUBMIT)).isEnabled(new LocatorAssertions.IsEnabledOptions().setTimeout(10000));
 
 
     }

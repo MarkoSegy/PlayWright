@@ -10,6 +10,5 @@ public class SignUptest extends PlaywrightRunner{
         page.locator("div.header-guest-user a.create-account-btn").click();
 
         createAccountPage.createAccount();
-
     }
 }
