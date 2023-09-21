@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import pages.AccountEntries;
 
 public class SignUptest extends PlaywrightRunner{
 
@@ -6,9 +7,9 @@ public class SignUptest extends PlaywrightRunner{
     public  void signUpTest(){
         page.navigate("https://bestbuy.com/?intl=nosplash");
 
-        page.locator("button[data-lid='hdr_signin']").click();
-        page.locator("div.header-guest-user a.create-account-btn").click();
 
-        createAccountPage.createAccount();
+
+        accountNavigationPage.navigateTo(AccountEntries.CREATE_ACCOUNT);
+        //createAccountPage.createAccount();
     }
 }
